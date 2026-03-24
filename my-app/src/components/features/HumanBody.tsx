@@ -1,6 +1,5 @@
 'use client';
 
-import dynamic from 'next/dynamic';
 import { useRef, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, useGLTF } from '@react-three/drei';
@@ -12,8 +11,8 @@ const HologramShader = {
   uniforms: {
     c: { value: 0.1 },
     p: { value: 3.5 },
-    glowColor: { value: new THREE.Color(0x33b8ff) },
-    baseColor: { value: new THREE.Color(0x020815) },
+    glowColor: { value: new THREE.Color(0x0088cc) }, // 30% secondary
+    baseColor: { value: new THREE.Color(0x020815) }, // 60% dominant
   },
   vertexShader: `
     varying vec3 vNormal;
@@ -29,7 +28,7 @@ const HologramShader = {
     uniform float p;
     varying vec3 vNormal;
     void main() {
-      float intensity = pow(c - dot(vNormal, vec3(0.0, 0.0, 1.0)), p);
+      float intensity = pow(clamp(c - dot(vNormal, vec3(0.0, 0.0, 1.0)), 0.0, 1.0), p);
       gl_FragColor = vec4(mix(baseColor, glowColor, intensity), intensity * 1.5 + 0.1);
     }
   `,
@@ -59,7 +58,7 @@ function HumanBody() {
     });
 
     const lineMaterial = new THREE.LineBasicMaterial({
-      color: 0x44ccff,
+      color: 0x0088cc, // 30% secondary
       transparent: true,
       opacity: 0.8,
       blending: THREE.AdditiveBlending,
@@ -93,6 +92,7 @@ function HumanBody() {
     if (groupRef.current) {
       groupRef.current.position.y =
         Math.sin(state.clock.elapsedTime * 0.5) * 0.05 - 3;
+      groupRef.current.rotation.y = state.clock.elapsedTime * 0.6;
     }
   });
 
@@ -105,6 +105,85 @@ function HumanBody() {
 
 useGLTF.preload('https://threejs.org/examples/models/gltf/Xbot.glb');
 
+/* -------------------- Platform -------------------- */
+
+function Platform() {
+  const ring1 = useRef<THREE.Mesh>(null);
+  const ring2 = useRef<THREE.Mesh>(null);
+  const ring3 = useRef<THREE.Mesh>(null);
+
+  useFrame((state) => {
+    const t = state.clock.elapsedTime;
+    if (ring1.current) ring1.current.rotation.z = t * 0.5;
+    if (ring2.current) ring2.current.rotation.z = -t * 0.3;
+    if (ring3.current) ring3.current.rotation.z = t * 0.2;
+  });
+
+  return (
+    <group position={[0, -3.05, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+      {/* base disc */}
+      <mesh>
+        <circleGeometry args={[1.8, 128]} />
+        <meshBasicMaterial
+          color="#020815"
+          transparent
+          opacity={0.25}
+          blending={THREE.AdditiveBlending}
+          depthWrite={false}
+        />
+      </mesh>
+
+      {/* inner ring */}
+      <mesh ref={ring1}>
+        <ringGeometry args={[0.7, 0.74, 128]} />
+        <meshBasicMaterial
+          color="#0088cc"
+          transparent
+          opacity={0.9}
+          blending={THREE.AdditiveBlending}
+          depthWrite={false}
+        />
+      </mesh>
+
+      {/* mid ring */}
+      <mesh ref={ring2}>
+        <ringGeometry args={[1.1, 1.14, 128]} />
+        <meshBasicMaterial
+          color="#0088cc"
+          transparent
+          opacity={0.7}
+          blending={THREE.AdditiveBlending}
+          depthWrite={false}
+        />
+      </mesh>
+
+      {/* outer ring */}
+      <mesh ref={ring3}>
+        <ringGeometry args={[1.6, 1.65, 128]} />
+        <meshBasicMaterial
+          color="#0088cc"
+          transparent
+          opacity={0.5}
+          blending={THREE.AdditiveBlending}
+          depthWrite={false}
+        />
+      </mesh>
+
+      {/* diagonal accent line */}
+      <mesh rotation={[0, 0, Math.PI / 4]}>
+        <ringGeometry args={[0.0, 1.75, 2, 1, 0, 0.04]} />
+        <meshBasicMaterial
+          color="#44ddff"
+          transparent
+          opacity={0.95}
+          blending={THREE.AdditiveBlending}
+          depthWrite={false}
+        />
+      </mesh>
+    </group>
+  );
+}
+
 /* -------------------- Page -------------------- */
 
 export default function Page() {
@@ -113,6 +192,7 @@ export default function Page() {
       <Canvas camera={{ position: [0, 0, 5], fov: 50 }}>
         <ambientLight intensity={0.3} />
         <HumanBody />
+        <Platform />
         <OrbitControls />
       </Canvas>
     </main>
