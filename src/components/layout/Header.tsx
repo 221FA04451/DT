@@ -4,7 +4,7 @@ import Image from "next/image";
 export function Header() {
   return (
     <header className="fixed top-0 z-50 w-full border-b border-white/5 bg-[#18181b]/90 backdrop-blur-2xl">
-      <div className="w-full flex h-24 items-center justify-between px-8 lg:px-16">
+      <div className="mx-auto max-w-screen-2xl w-full flex h-14 items-center justify-between px-8">
         {/* Logo and Brand */}
         <Link href="/" className="group flex items-center gap-3 transition-opacity">
           <Image
