@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export function Footer() {
   return (
-    <footer className="w-full bg-[#18181b] text-[#86868b] text-[11px] font-sans antialiased">
+    <footer className="w-full bg-black text-zinc-500 text-[11px] font-sans antialiased border-t border-white/[0.06]">
       <div className="w-full px-8 py-12 lg:px-16">
         {/* Logo / Breadcrumb */}
         <div className="mb-8">
@@ -22,11 +22,11 @@ export function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-y-8 gap-x-4 mb-8">
           {/* Column 1 */}
           <div>
-            <h3 className="font-semibold text-[#f5f5f7] mb-2 tracking-wide text-[12px]">Explore</h3>
+            <h3 className="font-semibold text-white mb-2 tracking-wide text-[12px]">Explore</h3>
             <ul className="flex flex-col gap-1.5">
               {['Features', 'Models', 'Solutions', 'Pricing'].map((link) => (
                 <li key={link}>
-                  <Link href="#" className="hover:text-[#f5f5f7] hover:underline transition-colors">{link}</Link>
+                  <Link href="#" className="hover:text-white transition-colors">{link}</Link>
                 </li>
               ))}
             </ul>
@@ -34,11 +34,11 @@ export function Footer() {
 
           {/* Column 2 */}
           <div>
-            <h3 className="font-semibold text-[#f5f5f7] mb-2 tracking-wide text-[12px]">Account</h3>
+            <h3 className="font-semibold text-white mb-2 tracking-wide text-[12px]">Account</h3>
             <ul className="flex flex-col gap-1.5">
               {['Manage Your ID', 'Store Account', 'Cloud.com'].map((link) => (
                 <li key={link}>
-                  <Link href="#" className="hover:text-[#f5f5f7] hover:underline transition-colors">{link}</Link>
+                  <Link href="#" className="hover:text-white transition-colors">{link}</Link>
                 </li>
               ))}
             </ul>
@@ -46,11 +46,11 @@ export function Footer() {
 
           {/* Column 3 */}
           <div>
-            <h3 className="font-semibold text-[#f5f5f7] mb-2 tracking-wide text-[12px]">Company</h3>
+            <h3 className="font-semibold text-white mb-2 tracking-wide text-[12px]">Company</h3>
             <ul className="flex flex-col gap-1.5">
               {['About Digital Twin', 'Careers', 'Ethics'].map((link) => (
                 <li key={link}>
-                  <Link href="#" className="hover:text-[#f5f5f7] hover:underline transition-colors">{link}</Link>
+                  <Link href="#" className="hover:text-white transition-colors">{link}</Link>
                 </li>
               ))}
             </ul>
@@ -58,36 +58,31 @@ export function Footer() {
 
           {/* Column 4 */}
           <div>
-            <h3 className="font-semibold text-[#f5f5f7] mb-2 tracking-wide text-[12px]">Support</h3>
+            <h3 className="font-semibold text-white mb-2 tracking-wide text-[12px]">Support</h3>
             <ul className="flex flex-col gap-1.5">
               {['Contact Us', 'Documentation', 'Community'].map((link) => (
                 <li key={link}>
-                  <Link href="#" className="hover:text-[#f5f5f7] hover:underline transition-colors">{link}</Link>
+                  <Link href="#" className="hover:text-white transition-colors">{link}</Link>
                 </li>
               ))}
             </ul>
           </div>
         </div>
 
-        {/* Bottom Bar: Call to action above copyright */}
-        <div className="border-b border-[#424245] pb-4 mb-4 text-xs">
-          More ways to shop: <Link href="#" className="text-[#0066cc] hover:underline">Find a retailer</Link> near you. Or call 1-800-MY-TWIN.
-        </div>
-
         {/* Bottom Bar: Copyright & Legal */}
-        <div className="flex flex-col md:flex-row items-baseline justify-between gap-4">
+        <div className="border-t border-white/[0.06] pt-4 flex flex-col md:flex-row items-baseline justify-between gap-4">
           <div className="flex flex-col md:flex-row md:items-center gap-4 text-left">
             <p>Copyright © {new Date().getFullYear()} Digital Twin Inc. All rights reserved.</p>
             <div className="hidden md:flex items-center gap-2.5">
               {['Privacy Policy', 'Terms of Use', 'Legal', 'Site Map'].map((link, idx, arr) => (
                 <span key={link} className="flex items-center gap-2.5">
-                  <Link href="#" className="hover:text-[#f5f5f7] hover:underline transition-colors text-nowrap">{link}</Link>
-                  {idx < arr.length - 1 && <span className="w-px h-3 bg-[#424245]"></span>}
+                  <Link href="#" className="hover:text-white transition-colors text-nowrap">{link}</Link>
+                  {idx < arr.length - 1 && <span className="w-px h-3 bg-white/10" />}
                 </span>
               ))}
             </div>
           </div>
-          <Link href="#" className="hover:text-[#f5f5f7] hover:underline transition-colors text-nowrap self-start md:self-auto uppercase">
+          <Link href="#" className="hover:text-white transition-colors text-nowrap self-start md:self-auto uppercase">
             United States
           </Link>
         </div>

@@ -46,10 +46,10 @@ function ProductCard({
       initial={{ opacity: 0, y: 48 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1], delay: index * 0.12 }}
-      className="group relative flex flex-col justify-between rounded-2xl border border-white/8 bg-white/[0.02] p-8 hover:border-white/20 hover:bg-white/[0.04] transition-all duration-500"
+      className="group relative flex flex-col justify-between rounded-2xl border border-white/[0.08] bg-white/[0.02] p-8 hover:border-white/20 hover:bg-white/[0.04] transition-all duration-500"
     >
       {/* top row */}
-      <div className="mb-8 flex items-start justify-between">
+      <div className="mb-5 flex items-start justify-between">
         <span className="text-[11px] font-bold uppercase tracking-[0.25em] text-zinc-600">
           {item.number}
         </span>
@@ -67,14 +67,9 @@ function ProductCard({
       </div>
 
       {/* arrow */}
-      <div className="mt-8 flex items-center gap-2 text-xs font-semibold text-zinc-600 group-hover:text-white transition-colors">
+      <div className="mt-5 flex items-center gap-2 text-xs font-semibold text-zinc-600 group-hover:text-white transition-colors">
         <span>Explore</span>
-        <motion.span
-          animate={{ x: [0, 4, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-        >
-          →
-        </motion.span>
+        <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">→</span>
       </div>
 
       {/* subtle corner accent */}
@@ -88,7 +83,7 @@ export default function ProductOverview() {
   const titleInView = useInView(titleRef, { once: true, margin: "-60px" });
 
   return (
-    <section id="product-overview" className="bg-black px-6 py-32 md:px-16 lg:px-24">
+    <section id="product-overview" className="bg-black px-6 py-14 md:px-16 lg:px-24">
       <div className="mx-auto max-w-7xl">
 
         {/* heading */}
@@ -97,7 +92,7 @@ export default function ProductOverview() {
           initial={{ opacity: 0, y: 32 }}
           animate={titleInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7 }}
-          className="mb-20"
+          className="mb-10"
         >
           <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.25em] text-zinc-600">
             Product Overview

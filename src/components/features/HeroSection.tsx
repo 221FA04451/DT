@@ -25,7 +25,7 @@ export default function HeroSection() {
           className="object-cover opacity-40"
         />
         {/* dark gradient overlay so text stays readable */}
-        <div className="absolute inset-0 bg-linear-to-b from-black/60 via-black/30 to-black/80" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/80" />
       </div>
 
       {/* headline */}

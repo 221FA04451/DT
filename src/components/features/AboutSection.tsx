@@ -175,7 +175,7 @@ function FeatureCard({
       style={{ opacity, x }}
       className={`absolute ${CARD_POSITIONS[index]} w-64 lg:w-72 pointer-events-auto`}
     >
-      <div className="rounded-2xl border border-white/8 bg-white/3 backdrop-blur-xl p-5 hover:border-white/20 hover:bg-white/6 transition-all duration-300">
+      <div className="rounded-2xl border border-white/[0.08] bg-white/[0.03] backdrop-blur-xl p-5 hover:border-white/20 hover:bg-white/[0.06] transition-all duration-300">
         <h3 className="mb-2 text-base font-bold tracking-widest text-white uppercase">
           {feature.title}
         </h3>

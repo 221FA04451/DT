@@ -4,6 +4,7 @@ import HumanBodySection     from "@/components/features/HumanBody";
 import ADMESection          from "@/components/features/ADMESection";
 import AboutSection         from "@/components/features/AboutSection";
 import HowItWorks           from "@/components/features/HowItWorks";
+import Benefits             from "@/components/features/Benefits";
 
 
 export default function Home() {
@@ -19,6 +20,7 @@ export default function Home() {
       </div>
       <AboutSection />
       <HowItWorks />
+      <Benefits />
     </div>
   );
 }
