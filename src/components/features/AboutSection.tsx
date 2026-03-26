@@ -104,12 +104,11 @@ function Headline({ progress }: { progress: MotionValue<number> }) {
 function Hologram({ progress }: { progress: MotionValue<number> }) {
   const opacity = useTransform(progress, [0.18, 0.3, 0.72, 0.82], [0, 1, 1, 0]);
   const scale  = useTransform(progress, [0.18, 0.4, 0.72], [0.7, 1.0, 1.15]);
-  const blur   = useTransform(progress, [0.18, 0.3, 0.72, 0.82], ["blur(14px)", "blur(0px)", "blur(0px)", "blur(14px)"]);
   const ringScale = useTransform(progress, [0.25, 0.6], [0.9, 1.08]);
 
   return (
     <motion.div
-      style={{ opacity, scale, filter: blur }}
+      style={{ opacity, scale }}
       className="relative z-10 w-[min(90vw,720px)] aspect-square"
     >
       {/* glow ring */}
@@ -175,7 +174,7 @@ function FeatureCard({
       style={{ opacity, x }}
       className={`absolute ${CARD_POSITIONS[index]} w-64 lg:w-72 pointer-events-auto`}
     >
-      <div className="rounded-2xl border border-white/[0.08] bg-white/[0.03] backdrop-blur-xl p-5 hover:border-white/20 hover:bg-white/[0.06] transition-all duration-300">
+      <div className="rounded-2xl border border-white/[0.08] bg-zinc-950/80 p-5 hover:border-white/20 hover:bg-zinc-900/80 transition-all duration-300">
         <h3 className="mb-2 text-base font-bold tracking-widest text-white uppercase">
           {feature.title}
         </h3>

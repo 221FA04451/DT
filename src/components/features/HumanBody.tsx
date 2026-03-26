@@ -1,7 +1,7 @@
 'use client';
 
-import { useRef, useMemo } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
+import { useRef, useMemo, useEffect } from 'react';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { OrbitControls, useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
 
@@ -33,6 +33,18 @@ const HologramShader = {
     }
   `,
 };
+
+/* -------------------- DisableScrollZoom -------------------- */
+
+function DisableScrollZoom() {
+  const { gl } = useThree();
+  useEffect(() => {
+    const handler = (e: WheelEvent) => e.stopImmediatePropagation();
+    gl.domElement.addEventListener('wheel', handler, { capture: true });
+    return () => gl.domElement.removeEventListener('wheel', handler, { capture: true });
+  }, [gl]);
+  return null;
+}
 
 /* -------------------- HumanBody -------------------- */
 
@@ -188,12 +200,25 @@ function Platform() {
 
 export default function Page() {
   return (
-    <main className="w-full h-screen bg-black">
-      <Canvas camera={{ position: [0, 0, 5], fov: 50 }}>
+    <main className="w-full h-screen bg-black" style={{ touchAction: 'pan-y' }}>
+      <Canvas
+        camera={{ position: [0, 0, 5], fov: 50 }}
+        gl={{ powerPreference: 'high-performance', antialias: false }}
+        dpr={[1, 1.5]}
+        onCreated={({ gl }) => { gl.domElement.style.touchAction = 'pan-y'; }}
+      >
         <ambientLight intensity={0.3} />
         <HumanBody />
         <Platform />
-        <OrbitControls />
+        <DisableScrollZoom />
+        <OrbitControls
+          mouseButtons={{
+            LEFT: 0,   // ROTATE
+            MIDDLE: 1, // DOLLY
+            RIGHT: 1,  // DOLLY (zoom) on right click
+          }}
+          enablePan={false}
+        />
       </Canvas>
     </main>
   );

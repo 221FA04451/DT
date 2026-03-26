@@ -18,7 +18,7 @@ export function Header() {
         
         {/* Corporate SaaS Navigation */}
         <nav className="hidden items-center gap-8 md:flex">
-          {['Product', 'Solutions', 'Resources', 'Pricing', 'Company'].map((item) => (
+          {['Dashboard', 'Product', 'Solutions', 'Resources', 'Pricing', 'Company'].map((item) => (
             <Link
               key={item}
               href={`/${item.toLowerCase()}`}
