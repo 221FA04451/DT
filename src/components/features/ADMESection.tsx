@@ -16,7 +16,7 @@ const admeData = [
     id: "A",
     title: "Absorption.",
     description:
-      "The primary process by which a drug enters the bloodstream from its site of administration, determining systemic availability.",
+      "From the moment of administration, every compound races against biological barriers. We model exactly how much reaches systemic circulation — and why.",
     image: "/Pharmacokinetics/absorption.png",
     parameters: [
       { label: "Bioavailability", value: "85%" },
@@ -28,7 +28,7 @@ const admeData = [
     id: "D",
     title: "Distribution.",
     description:
-      "How the therapeutic agent is predictably dispersed and partitioned through the fluids and tissues of the complete physiological model.",
+      "A drug's reach defines its power. We trace how it travels through blood, tissue, and organs — mapping exactly where it goes, and where it doesn't.",
     image: "/Pharmacokinetics/distribution.png",
     parameters: [
       { label: "Vd", value: "0.7 L/kg" },
@@ -40,7 +40,7 @@ const admeData = [
     id: "M",
     title: "Metabolism.",
     description:
-      "Real-time chemical alteration of the drug mapping enzymatic breakdown and hepatic clearance with absolute granularity.",
+      "The body never accepts a drug unchanged. We simulate enzymatic breakdown and hepatic processing to reveal what the compound truly becomes inside you.",
     image: "/Pharmacokinetics/metabolism.png",
     parameters: [
       { label: "Half-life", value: "4.2h" },
@@ -52,7 +52,7 @@ const admeData = [
     id: "E",
     title: "Excretion.",
     description:
-      "The complete removal pipeline of the drug and its active metabolites from the systemic circulation.",
+      "Every drug must leave. We model the full clearance pathway — renal, biliary, and beyond — ensuring nothing lingers longer than it should.",
     image: "/Pharmacokinetics/excretion.png",
     parameters: [
       { label: "Renal Clear", value: "75%" },
@@ -129,21 +129,9 @@ export default function ADMESection() {
                 <h3 className="text-3xl md:text-5xl font-black tracking-tight mb-2 text-white">
                   {phase.title}
                 </h3>
-                <p className="text-zinc-500 text-xs md:text-sm leading-relaxed max-w-xs mb-6">
+                <p className="text-zinc-500 text-xs md:text-sm leading-relaxed max-w-xs">
                   {phase.description}
                 </p>
-                <div className="flex gap-6 md:gap-10">
-                  {phase.parameters.map((param) => (
-                    <div key={param.label} className="flex flex-col gap-0.5">
-                      <span className="text-[9px] md:text-[10px] uppercase tracking-[0.2em] font-bold text-zinc-600">
-                        {param.label}
-                      </span>
-                      <span className="text-base md:text-xl font-bold text-white tracking-tight">
-                        {param.value}
-                      </span>
-                    </div>
-                  ))}
-                </div>
               </div>
             </motion.div>
           </AnimatePresence>

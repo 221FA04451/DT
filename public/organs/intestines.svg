@@ -1,0 +1,51 @@
+<svg style="background:transparent" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 420">
+  <defs>
+    <linearGradient id="cg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#dd6633"/>
+      <stop offset="50%" stop-color="#cc4422"/>
+      <stop offset="100%" stop-color="#882211"/>
+    </linearGradient>
+    <linearGradient id="sg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ee8855"/>
+      <stop offset="50%" stop-color="#dd6633"/>
+      <stop offset="100%" stop-color="#aa3318"/>
+    </linearGradient>
+    <filter id="is"><feGaussianBlur stdDeviation="2.5"/></filter>
+  </defs>
+
+  <!-- Large intestine (colon) frame — thick tube -->
+  <!-- Top transverse -->
+  <rect x="55" y="35" width="310" height="52" rx="26" fill="url(#cg)"/>
+  <rect x="55" y="35" width="310" height="52" rx="26" fill="rgba(255,255,255,0.12)"/>
+  <!-- Ascending (right) -->
+  <rect x="314" y="35" width="52" height="240" rx="26" fill="url(#cg)"/>
+  <rect x="314" y="35" width="52" height="240" rx="26" fill="rgba(255,255,255,0.10)"/>
+  <!-- Descending (left) -->
+  <rect x="55" y="35" width="52" height="240" rx="26" fill="url(#cg)"/>
+  <rect x="55" y="35" width="52" height="240" rx="26" fill="rgba(255,255,255,0.10)"/>
+  <!-- Sigmoid / bottom -->
+  <path d="M81,262 Q81,320 140,335 Q210,350 260,335 Q330,318 340,270" stroke="url(#cg)" stroke-width="52" fill="none" stroke-linecap="round"/>
+
+  <!-- Haustra markings on colon -->
+  <line x1="55"  y1="68"  x2="365" y2="68"  stroke="rgba(80,15,5,0.22)" stroke-width="3"/>
+  <line x1="120" y1="35"  x2="120" y2="87"  stroke="rgba(80,15,5,0.22)" stroke-width="3"/>
+  <line x1="180" y1="35"  x2="180" y2="87"  stroke="rgba(80,15,5,0.22)" stroke-width="3"/>
+  <line x1="240" y1="35"  x2="240" y2="87"  stroke="rgba(80,15,5,0.22)" stroke-width="3"/>
+  <line x1="300" y1="35"  x2="300" y2="87"  stroke="rgba(80,15,5,0.22)" stroke-width="3"/>
+  <line x1="340" y1="90"  x2="340" y2="265" stroke="rgba(80,15,5,0.22)" stroke-width="3"/>
+  <line x1="314" y1="140" x2="366" y2="140" stroke="rgba(80,15,5,0.22)" stroke-width="3"/>
+  <line x1="314" y1="200" x2="366" y2="200" stroke="rgba(80,15,5,0.22)" stroke-width="3"/>
+  <line x1="55"  y1="90"  x2="55"  y2="265" stroke="rgba(80,15,5,0.22)" stroke-width="3"/>
+  <line x1="55"  y1="140" x2="107" y2="140" stroke="rgba(80,15,5,0.22)" stroke-width="3"/>
+  <line x1="55"  y1="200" x2="107" y2="200" stroke="rgba(80,15,5,0.22)" stroke-width="3"/>
+
+  <!-- Small intestine coils (inside the frame) -->
+  <ellipse cx="210" cy="165" rx="70" ry="40" stroke="url(#sg)" stroke-width="20" fill="none"/>
+  <ellipse cx="210" cy="210" rx="55" ry="32" stroke="url(#sg)" stroke-width="18" fill="none"/>
+  <ellipse cx="210" cy="248" rx="42" ry="24" stroke="url(#sg)" stroke-width="16" fill="none"/>
+  <ellipse cx="210" cy="278" rx="30" ry="16" stroke="url(#sg)" stroke-width="14" fill="none"/>
+
+  <!-- Highlights on small intestine -->
+  <ellipse cx="210" cy="148" rx="70" ry="40" stroke="rgba(255,200,160,0.20)" stroke-width="8" fill="none"/>
+  <ellipse cx="210" cy="195" rx="55" ry="32" stroke="rgba(255,200,160,0.18)" stroke-width="7" fill="none"/>
+</svg>

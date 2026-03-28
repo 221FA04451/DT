@@ -11,8 +11,8 @@ export function Footer() {
             <Image
               src="/logo.png"
               alt="Digital Twin Logo"
-              width={80}
-              height={80}
+              width={100}
+              height={100}
               className="object-contain drop-shadow-[0_0_15px_rgba(6,182,212,0.3)] transition-transform duration-500 group-hover:scale-105"
             />
           </Link>
@@ -83,7 +83,7 @@ export function Footer() {
             </div>
           </div>
           <Link href="#" className="hover:text-white transition-colors text-nowrap self-start md:self-auto uppercase">
-            United States
+            India
           </Link>
         </div>
       </div>

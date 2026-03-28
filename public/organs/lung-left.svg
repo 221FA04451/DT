@@ -1,0 +1,29 @@
+<svg style="background:transparent" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 460">
+  <defs>
+    <radialGradient id="lg" cx="55%" cy="38%" r="58%">
+      <stop offset="0%" stop-color="#ff7a66"/>
+      <stop offset="35%" stop-color="#dd3322"/>
+      <stop offset="70%" stop-color="#aa1a10"/>
+      <stop offset="100%" stop-color="#550a06"/>
+    </radialGradient>
+    <radialGradient id="ll" cx="65%" cy="24%" r="20%">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.48)"/>
+      <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+    <filter id="ls"><feGaussianBlur stdDeviation="3"/></filter>
+  </defs>
+  <!-- Shadow -->
+  <path d="M120,18 C75,14 15,45 5,115 C-6,185 8,295 38,370 C62,428 100,454 130,454 C160,454 200,430 220,380 C238,338 242,280 238,220 C230,145 215,80 185,45 C165,22 145,20 120,18Z" fill="rgba(0,0,0,0.22)" transform="translate(5,7)" filter="url(#ls)"/>
+  <!-- Main body (left lung — cardiac notch bottom-right) -->
+  <path d="M120,18 C75,14 15,45 5,115 C-6,185 8,295 38,370 C62,428 100,454 130,454 C160,454 200,430 220,380 C238,338 242,280 238,220 C230,145 215,80 185,45 C165,22 145,20 120,18Z" fill="url(#lg)"/>
+  <!-- Single fissure -->
+  <path d="M8,222 Q125,238 240,222" stroke="rgba(60,10,4,0.38)" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <!-- Bronchus (mirrored) -->
+  <path d="M132,18 L136,65 Q160,95 182,135" stroke="#bb2a1a" stroke-width="9" fill="none" stroke-linecap="round"/>
+  <path d="M136,65 Q112,100 100,145"        stroke="#bb2a1a" stroke-width="7" fill="none" stroke-linecap="round"/>
+  <path d="M182,135 Q200,175 205,220"       stroke="#aa2010" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <path d="M182,135 Q178,178 172,218"       stroke="#aa2010" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <path d="M100,145 Q82,185 76,228"         stroke="#aa2010" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <!-- Highlight -->
+  <ellipse cx="158" cy="88" rx="46" ry="28" fill="url(#ll)" transform="rotate(18 158 88)"/>
+</svg>

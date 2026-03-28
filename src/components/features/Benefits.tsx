@@ -30,9 +30,9 @@ const audiences = [
   {
     id: "hospitals",
     label: "For Hospitals",
-    accent: "bg-violet-400",
-    border: "border-violet-500/20",
-    badgeColor: "text-violet-400",
+    accent: "bg-cyan-400",
+    border: "border-cyan-500/20",
+    badgeColor: "text-cyan-400",
     metric: { value: "40%", label: "Reduction in adverse drug events" },
     headline: "Reduce risk at scale.",
     description:
@@ -52,9 +52,9 @@ const audiences = [
   {
     id: "pharma",
     label: "For Pharma",
-    accent: "bg-emerald-400",
-    border: "border-emerald-500/20",
-    badgeColor: "text-emerald-400",
+    accent: "bg-cyan-400",
+    border: "border-cyan-500/20",
+    badgeColor: "text-cyan-400",
     metric: { value: "3×", label: "Faster time to pre-clinical insight" },
     headline: "Accelerate your pipeline.",
     description:

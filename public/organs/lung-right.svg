@@ -1,0 +1,30 @@
+<svg style="background:transparent" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 460">
+  <defs>
+    <radialGradient id="lg" cx="42%" cy="38%" r="58%">
+      <stop offset="0%" stop-color="#ff7a66"/>
+      <stop offset="35%" stop-color="#dd3322"/>
+      <stop offset="70%" stop-color="#aa1a10"/>
+      <stop offset="100%" stop-color="#550a06"/>
+    </radialGradient>
+    <radialGradient id="ll" cx="32%" cy="24%" r="20%">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.48)"/>
+      <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+    <filter id="ls"><feGaussianBlur stdDeviation="3"/></filter>
+  </defs>
+  <!-- Shadow -->
+  <path d="M140,18 C185,14 250,45 265,115 C280,185 268,295 240,370 C218,428 175,454 140,454 C105,454 62,428 40,370 C12,295 0,185 15,115 C30,45 95,14 140,18Z" fill="rgba(0,0,0,0.22)" transform="translate(5,7)" filter="url(#ls)"/>
+  <!-- Main body -->
+  <path d="M140,18 C185,14 250,45 265,115 C280,185 268,295 240,370 C218,428 175,454 140,454 C105,454 62,428 40,370 C12,295 0,185 15,115 C30,45 95,14 140,18Z" fill="url(#lg)"/>
+  <!-- Lobe fissures -->
+  <path d="M18,188 Q140,205 262,188" stroke="rgba(60,10,4,0.38)" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <path d="M22,305 Q140,320 258,305" stroke="rgba(60,10,4,0.32)" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <!-- Bronchus -->
+  <path d="M130,18 L125,65 Q100,95 78,135" stroke="#bb2a1a" stroke-width="9" fill="none" stroke-linecap="round"/>
+  <path d="M125,65 Q148,100 158,145"       stroke="#bb2a1a" stroke-width="7" fill="none" stroke-linecap="round"/>
+  <path d="M78,135 Q60,175 55,220"         stroke="#aa2010" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <path d="M78,135 Q82,178 88,218"         stroke="#aa2010" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <path d="M158,145 Q172,185 178,228"      stroke="#aa2010" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <!-- Highlight -->
+  <ellipse cx="105" cy="88" rx="50" ry="30" fill="url(#ll)" transform="rotate(-18 105 88)"/>
+</svg>

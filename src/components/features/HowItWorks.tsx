@@ -19,7 +19,7 @@ const steps = [
     description:
       "Clinical records, lab results, and genomic data are collected and validated, forming the complete biological profile of the patient.",
     prompts: ["Receiving patient data...", "Synchronizing clinical inputs..."],
-    image: "/HowItWorks/step1.png",
+    image: "/HowItWorks/Step2.webp",
     alt: "Patient data collection",
     color: { badge: "text-cyan-400", ring: "border-cyan-500/30" },
   },
@@ -32,7 +32,7 @@ const steps = [
     prompts: ["Generating digital twin...", "Mapping organ systems..."],
     image: "/HowItWorks/Step2.webp",
     alt: "Digital twin model generation",
-    color: { badge: "text-violet-400", ring: "border-violet-500/30" },
+    color: { badge: "text-cyan-400", ring: "border-cyan-500/30" },
   },
   {
     step: "03",
@@ -41,9 +41,9 @@ const steps = [
     description:
       "The selected treatment is introduced into the virtual model, simulating the full ADME pipeline — absorption, distribution, metabolism, and excretion.",
     prompts: ["Initializing simulation...", "Tracking drug movement..."],
-    image: "/HowItWorks/step3.png",
+    image: "/HowItWorks/Step2.webp",
     alt: "Drug simulation",
-    color: { badge: "text-blue-400", ring: "border-blue-500/30" },
+    color: { badge: "text-cyan-400", ring: "border-cyan-500/30" },
   },
   {
     step: "04",
@@ -52,9 +52,9 @@ const steps = [
     description:
       "Each organ reacts to the treatment in real-time. The platform tracks pharmacokinetic curves, highlights risk signals, and records systemic changes.",
     prompts: ["Analyzing organ response...", "Monitoring system changes..."],
-    image: "/HowItWorks/step4.png",
+    image: "/HowItWorks/Step2.webp",
     alt: "Organ response monitoring",
-    color: { badge: "text-emerald-400", ring: "border-emerald-500/30" },
+    color: { badge: "text-cyan-400", ring: "border-cyan-500/30" },
   },
   {
     step: "05",
@@ -63,9 +63,9 @@ const steps = [
     description:
       "Clear, FDA/EMA-ready insights are generated — enabling confident treatment planning, dosing optimisation, and clinical decision support.",
     prompts: ["Compiling results...", "Generating treatment insights..."],
-    image: "/HowItWorks/step5.png",
+    image: "/HowItWorks/Step2.webp",
     alt: "Treatment outcome insights",
-    color: { badge: "text-amber-400", ring: "border-amber-500/30" },
+    color: { badge: "text-cyan-400", ring: "border-cyan-500/30" },
   },
 ];
 
