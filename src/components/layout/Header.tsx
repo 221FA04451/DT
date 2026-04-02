@@ -9,16 +9,9 @@ const NAV_ITEMS = ['Home','Solutions', 'Resources', 'Company'];
 export function Header() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [visible, setVisible] = useState(true);
 
   useEffect(() => {
-    let lastY = window.scrollY;
-    const onScroll = () => {
-      const currentY = window.scrollY;
-      setScrolled(currentY > 0);
-      setVisible(currentY < lastY || currentY < 10);
-      lastY = currentY;
-    };
+    const onScroll = () => setScrolled(window.scrollY > 0);
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
@@ -26,7 +19,7 @@ export function Header() {
   return (
     <>
       <header
-        className={`fixed top-0 z-50 w-full transition-all duration-300 ${visible ? 'translate-y-0' : '-translate-y-full'}`}
+        className="fixed top-0 z-50 w-full transition-colors duration-300"
         style={{
           background: scrolled
             ? 'rgba(0,0,0,0.85)'
@@ -36,7 +29,7 @@ export function Header() {
           borderBottom: '1px solid rgba(255,255,255,0.08)',
         }}
       >
-        <div className="relative mx-auto flex h-11 max-w-245 items-center justify-between px-4 md:px-5">
+        <div className="relative mx-auto flex h-11 max-w-[980px] items-center justify-between px-4 md:px-5">
 
           {/* Logo — left */}
           <Link href="/" className="flex shrink-0 items-center opacity-80 hover:opacity-100 transition-opacity duration-200">
@@ -66,7 +59,7 @@ export function Header() {
           <div className="hidden md:flex items-center">
             <Link
               href="/demo"
-              className="rounded-full bg-white px-4 py-1.5 text-[12px] font-medium text-black transition-opacity duration-150 hover:opacity-80"
+              className="text-[12px] font-normal leading-none tracking-[0.01em] text-[#f5f5f7]/80 transition-colors duration-150 hover:text-[#f5f5f7]"
             >
               Get IN
             </Link>
@@ -124,7 +117,7 @@ export function Header() {
           <Link
             href="/demo"
             onClick={() => setOpen(false)}
-            className="mt-6 self-start rounded-full bg-white px-6 py-2 text-[15px] font-medium text-black"
+            className="pt-6 text-[17px] font-normal text-[#2997ff]"
           >
             Get IN
           </Link>

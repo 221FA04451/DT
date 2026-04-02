@@ -102,6 +102,9 @@ function BenefitCard({
         {/* icon + label */}
         <div className="flex items-center justify-between">
           <div className={`${item.badgeColor} opacity-70`}>{item.icon}</div>
+          <span className={`text-[10px] font-bold tracking-[0.28em] uppercase ${item.badgeColor}`}>
+            {item.label}
+          </span>
         </div>
 
         {/* headline + description */}
