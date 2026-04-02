@@ -46,7 +46,7 @@ function Scene() {
       <directionalLight position={[5, 5, 5]} intensity={1.5} />
       <pointLight position={[-3, 2, -3]} intensity={1.2} color="#22d3ee" />
       <Suspense fallback={null}>
-        <Bounds fit clip observe>
+        <Bounds fit clip>
           <Model />
         </Bounds>
       </Suspense>
@@ -59,7 +59,7 @@ const SceneNoSSR = dynamic(() => Promise.resolve(Scene), { ssr: false });
 
 export default function HumanBody() {
   return (
-    <section className="bg-black h-screen w-full">
+    <section className="bg-black min-h-[100dvh] h-[100dvh] w-full">
       <SceneNoSSR />
     </section>
   );

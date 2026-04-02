@@ -1,35 +1,47 @@
 'use client';
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 
 const NAV_ITEMS = ['Home','Solutions', 'Resources', 'Company'];
 
 export function Header() {
   const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
+  const { scrollY } = useScroll();
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 0);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    const previous = scrollY.getPrevious() ?? 0;
+    // Scroll down the page (latest > previous) -> Hide header
+    // Scroll up the page (latest < previous) -> Show header
+    if (latest > previous && latest > 50) {
+      setHidden(true);
+    } else if (latest < previous) {
+      setHidden(false);
+    }
+  });
 
   return (
     <>
-      <header
-        className="fixed top-0 z-50 w-full transition-colors duration-300"
+      <motion.header
+        variants={{
+          visible: { y: 0 },
+          hidden: { y: "-100%" },
+        }}
+        initial="visible"
+        animate={hidden && !open ? "hidden" : "visible"}
+        transition={{ duration: 0.35, ease: "easeInOut" }}
+        className="sticky top-0 z-50 w-full transition-colors duration-300"
         style={{
-          background: scrolled
-            ? 'rgba(0,0,0,0.85)'
-            : 'rgba(0,0,0,1)',
+          background: 'rgba(0,0,0,0.85)',
           backdropFilter: 'saturate(180%) blur(20px)',
           WebkitBackdropFilter: 'saturate(180%) blur(20px)',
           borderBottom: '1px solid rgba(255,255,255,0.08)',
         }}
       >
-        <div className="relative mx-auto flex h-11 max-w-[980px] items-center justify-between px-4 md:px-5">
+        <div className="relative mx-auto flex h-14 max-w-[980px] items-center justify-between px-4 md:px-5">
 
           {/* Logo — left */}
           <Link href="/" className="flex shrink-0 items-center opacity-80 hover:opacity-100 transition-opacity duration-200">
@@ -68,7 +80,7 @@ export function Header() {
           {/* Mobile hamburger */}
           <button
             onClick={() => setOpen(!open)}
-            className="flex md:hidden h-11 w-11 items-center justify-center"
+            className="flex md:hidden h-14 w-14 items-center justify-center"
             aria-label="Toggle menu"
           >
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
@@ -90,7 +102,7 @@ export function Header() {
           </button>
 
         </div>
-      </header>
+      </motion.header>
 
       {/* Mobile full-screen overlay */}
       <div
@@ -100,7 +112,7 @@ export function Header() {
           background: 'rgba(29,29,31,0.96)',
           backdropFilter: 'saturate(180%) blur(20px)',
           WebkitBackdropFilter: 'saturate(180%) blur(20px)',
-          paddingTop: '44px',
+          paddingTop: '56px',
         }}
       >
         <nav className="flex flex-col px-5 pt-6">
