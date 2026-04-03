@@ -12,6 +12,7 @@ function Model() {
 
   scene.traverse((child) => {
     if ((child as THREE.Mesh).isMesh) {
+      console.log('Mesh Name:', child.name);
       const mesh = child as THREE.Mesh;
       mesh.material = new THREE.MeshStandardMaterial({
         color: new THREE.Color('#bae6fd'),

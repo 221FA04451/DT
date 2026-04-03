@@ -71,7 +71,7 @@ export function Header() {
           <div className="hidden md:flex items-center">
             <Link
               href="/demo"
-              className="text-[12px] font-normal leading-none tracking-[0.01em] text-[#f5f5f7]/80 transition-colors duration-150 hover:text-[#f5f5f7]"
+              className="text-[12px] font-medium leading-none tracking-tight text-white bg-blue-600 px-4 py-1.5 rounded-full transition-all duration-150 hover:bg-blue-500 hover:scale-105 active:scale-95 shadow-[0_0_15px_rgba(37,99,235,0.4)]"
             >
               Get IN
             </Link>
@@ -129,7 +129,7 @@ export function Header() {
           <Link
             href="/demo"
             onClick={() => setOpen(false)}
-            className="pt-6 text-[17px] font-normal text-[#2997ff]"
+            className="mt-6 flex items-center justify-center py-3 text-[15px] font-semibold text-white bg-blue-600 rounded-xl shadow-lg shadow-blue-600/20 active:scale-[0.98] transition-all"
           >
             Get IN
           </Link>
