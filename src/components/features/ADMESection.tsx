@@ -112,7 +112,7 @@ export default function ADMESection() {
       <div className="sticky top-0 h-screen flex flex-col items-center justify-center overflow-hidden bg-black px-4 sm:px-6 md:px-16 lg:px-24">
 
         {/* ── A D M E letters — driven by activeIndex, not scroll progress ── */}
-        <div className="relative z-10 flex justify-center items-baseline gap-x-3 sm:gap-x-4 md:gap-x-6 mb-6 md:mb-8">
+        <div className="relative z-10 flex justify-center items-baseline gap-x-3 sm:gap-x-4 md:gap-x-6 mb-3 md:mb-5">
           {admeData.map((item, i) => (
             <PhaseLabel key={item.id} label={item.id} isActive={i === activeIndex} />
           ))}

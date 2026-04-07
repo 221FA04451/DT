@@ -68,8 +68,19 @@ export default function HowItWorks() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white flex items-center justify-center px-4 sm:px-8 lg:px-16 py-10 md:py-0 overflow-hidden">
-      <div className="flex flex-col md:flex-row w-full max-w-7xl md:h-screen items-center gap-6 md:gap-0 md:py-8">
+    <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center px-4 sm:px-8 lg:px-16 py-6 md:py-0 overflow-hidden">
+
+      {/* Section header */}
+      <div className="w-full max-w-7xl pt-6 md:pt-10 pb-4 md:pb-6">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-zinc-600 mb-2">
+          How It Works
+        </p>
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-white leading-[1.05]">
+          From data to <span className="text-zinc-600">simulation.</span>
+        </h2>
+      </div>
+
+      <div className="flex flex-col md:flex-row w-full max-w-7xl md:flex-1 items-center gap-3 md:gap-0 md:pb-8">
 
         {/* Mobile: Image on top */}
         <div className="block md:hidden w-full relative" style={{ height: '44vw', minHeight: 200, maxHeight: 300 }}>
@@ -174,7 +185,7 @@ export default function HowItWorks() {
         </div>
 
         {/* Right Image Display — desktop only */}
-        <div className="hidden md:block flex-1 h-full pl-8 lg:pl-16 relative">
+        <div className="hidden md:flex flex-1 h-full pl-8 lg:pl-16 relative">
           <div className="w-full h-full rounded-4xl overflow-hidden bg-zinc-900 border-12 border-black shadow-[0_0_0_1px_rgba(255,255,255,0.08)] relative flex items-center justify-center">
 
             {/* Monitor Mockup Bezel */}

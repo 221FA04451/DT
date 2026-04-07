@@ -92,10 +92,10 @@ function BenefitCard({
       initial={{ opacity: 0, y: 40 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.75, ease, delay: index * 0.12 }}
-      className={`group relative flex flex-col rounded-2xl border ${item.border} bg-white/[0.02] overflow-hidden transition-colors duration-300 hover:bg-white/[0.04] hover:border-white/[0.12]`}
+      className={`group relative flex flex-col rounded-2xl border ${item.border} bg-white/2 overflow-hidden transition-colors duration-300 hover:bg-white/4 hover:border-white/12`}
     >
       {/* top accent line */}
-      <div className={`h-[2px] w-full ${item.accent} opacity-60`} />
+      <div className={`h-0.5 w-full ${item.accent} opacity-60`} />
 
       <div className="flex flex-col flex-1 p-6 gap-5">
 
@@ -124,7 +124,7 @@ function BenefitCard({
               transition={{ duration: 0.5, ease, delay: index * 0.12 + 0.25 + i * 0.07 }}
               className="flex items-start gap-3"
             >
-              <span className={`mt-[3px] h-4 w-4 shrink-0 rounded-full border ${item.border} flex items-center justify-center`}>
+              <span className={`mt-0.75 h-4 w-4 shrink-0 rounded-full border ${item.border} flex items-center justify-center`}>
                 <svg viewBox="0 0 10 10" className={`h-2.5 w-2.5 ${item.badgeColor}`} fill="none">
                   <path d="M2 5.5l2 2 4-4" stroke="currentColor" strokeWidth={1.4} strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
@@ -144,7 +144,7 @@ function BenefitCard({
           >
             {item.metric.value}
           </motion.span>
-          <span className="text-xs text-zinc-500 leading-snug max-w-[10rem]">
+          <span className="text-xs text-zinc-500 leading-snug max-w-40">
             {item.metric.label}
           </span>
         </div>
@@ -160,7 +160,7 @@ export default function Benefits() {
   const headerInView = useInView(headerRef, { once: true, margin: "-60px" });
 
   return (
-    <section className="bg-black px-6 py-14 md:px-16 lg:px-24">
+    <section className="bg-black px-4 py-8 sm:px-6 sm:py-10 md:px-16 md:py-12 lg:px-24">
       <div className="mx-auto max-w-7xl">
 
         {/* header */}
@@ -169,7 +169,7 @@ export default function Benefits() {
           initial={{ opacity: 0, y: 32 }}
           animate={headerInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, ease }}
-          className="mb-10 max-w-2xl"
+          className="mb-6 md:mb-10 max-w-2xl"
         >
           <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.35em] text-zinc-600">
             Platform Benefits
