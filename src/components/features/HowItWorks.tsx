@@ -43,11 +43,7 @@ const PlusIcon = () => (
   </svg>
 );
 
-const CircleIcon = () => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-    <circle cx="12" cy="12" r="9" fill="#4B5563" />
-  </svg>
-);
+
 
 const ChevronUpIcon = () => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -72,11 +68,11 @@ export default function HowItWorks() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white flex items-center justify-center p-8 lg:p-16 overflow-hidden">
-      <div className="flex w-full max-w-7xl h-[80vh] items-center">
-        
+    <div className="h-screen bg-black text-white flex items-center justify-center px-8 lg:px-16 overflow-hidden">
+      <div className="flex w-full max-w-7xl h-full items-center py-8">
+
         {/* Left Navigation & Accordion Container */}
-        <div className="flex w-[45%] max-w-md h-full items-start pt-12 lg:pt-[15vh]">
+        <div className="flex w-[45%] max-w-md h-full items-center">
           
           {/* Arrow Buttons */}
           <div className="flex flex-col gap-4 mr-8 lg:mr-12">
@@ -157,7 +153,7 @@ export default function HowItWorks() {
 
         {/* Right Image Display */}
         <div className="flex-1 h-full pl-8 lg:pl-16 relative perspective-1000">
-          <div className="w-full h-full rounded-[2rem] overflow-hidden bg-zinc-900 border-[12px] border-black shadow-[0_0_0_1px_rgba(255,255,255,0.08)] relative flex items-center justify-center">
+          <div className="w-full h-full rounded-4xl overflow-hidden bg-zinc-900 border-12 border-black shadow-[0_0_0_1px_rgba(255,255,255,0.08)] relative flex items-center justify-center">
             
             {/* Monitor Mockup Bezel (simulated) */}
             <div className="absolute top-0 w-full h-8 bg-black z-10 flex justify-center items-center">
@@ -167,7 +163,6 @@ export default function HowItWorks() {
             </div>
 
             <AnimatePresence mode="wait">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
               <motion.img
                 key={activeIndex}
                 src={features[activeIndex].image}

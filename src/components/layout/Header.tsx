@@ -35,13 +35,13 @@ export function Header() {
         transition={{ duration: 0.35, ease: "easeInOut" }}
         className="sticky top-0 z-50 w-full transition-colors duration-300"
         style={{
-          background: 'rgba(0,0,0,0.85)',
-          backdropFilter: 'saturate(180%) blur(20px)',
-          WebkitBackdropFilter: 'saturate(180%) blur(20px)',
+          background: 'rgba(0,0,0,0.90)',
+          backdropFilter: 'none',
+          WebkitBackdropFilter: 'none',
           borderBottom: '1px solid rgba(255,255,255,0.08)',
         }}
       >
-        <div className="relative mx-auto flex h-14 max-w-[980px] items-center justify-between px-4 md:px-5">
+        <div className="relative mx-auto flex h-14 max-w-245 items-center justify-between px-4 md:px-5">
 
           {/* Logo — left */}
           <Link href="/" className="flex shrink-0 items-center opacity-80 hover:opacity-100 transition-opacity duration-200">
@@ -59,7 +59,7 @@ export function Header() {
             {NAV_ITEMS.map((item) => (
               <Link
                 key={item}
-                href={`/${item.toLowerCase()}`}
+                href={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
                 className="text-[12px] font-normal leading-none tracking-[0.01em] text-[#f5f5f7]/80 transition-colors duration-150 hover:text-[#f5f5f7]"
               >
                 {item}
@@ -109,9 +109,9 @@ export function Header() {
         className={`fixed inset-0 z-40 flex flex-col md:hidden transition-all duration-300 ease-in-out ${open ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
           }`}
         style={{
-          background: 'rgba(29,29,31,0.96)',
-          backdropFilter: 'saturate(180%) blur(20px)',
-          WebkitBackdropFilter: 'saturate(180%) blur(20px)',
+          background: 'rgba(29,29,31,0.98)',
+          backdropFilter: 'none',
+          WebkitBackdropFilter: 'none',
           paddingTop: '56px',
         }}
       >
@@ -119,7 +119,7 @@ export function Header() {
           {NAV_ITEMS.map((item) => (
             <Link
               key={item}
-              href={`/${item.toLowerCase()}`}
+              href={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
               onClick={() => setOpen(false)}
               className="border-b border-[#424245] py-4 text-[17px] font-normal text-[#f5f5f7] transition-colors hover:text-[#f5f5f7]/70"
             >

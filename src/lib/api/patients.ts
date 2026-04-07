@@ -3,7 +3,7 @@ export async function getPatients() {
   return [];
 }
 
-export async function getPatientById(id: string) {
+export async function getPatientById(_id: string) {
   // TODO: connect to backend API
   return null;
 }

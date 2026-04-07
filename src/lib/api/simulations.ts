@@ -3,7 +3,7 @@ export async function getSimulations() {
   return [];
 }
 
-export async function getSimulationById(id: string) {
+export async function getSimulationById(_id: string) {
   // TODO: connect to backend API
   return null;
 }

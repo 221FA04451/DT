@@ -1,5 +1,4 @@
 import HumanBodySection from "@/components/features/HumanBody";
-
 import ADMESection      from "@/components/features/ADMESection";
 import HowItWorks       from "@/components/features/HowItWorks";
 import Benefits         from "@/components/features/Benefits";
@@ -14,7 +13,11 @@ export default function Home() {
       <div id="adme">
         <ADMESection />
       </div>
-      <HowItWorks />
+
+      <div id="how-it-works">
+        <HowItWorks />
+      </div>
+
       <Benefits />
     </div>
   );
