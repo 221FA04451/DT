@@ -84,15 +84,8 @@ function resolveOrganInfo(meshName: string): OrganInfo {
   for (const [key, data] of Object.entries(ORGAN_MAP)) {
     if (lower.includes(key)) return data;
   }
-  // Fallback: humanise the raw mesh name
-  const readable = meshName.replace(/[_\-\.]/g, ' ').replace(/\d+/g, '').trim();
-  return {
-    name: readable || 'Organ',
-    color: '#4a90a4',
-    glbPath: null,
-    description: 'Biological tissue forming part of the digital human model. Click specific organs for detailed analysis.',
-    bullets: ['Part of the anatomical model', 'Rendered at molecular fidelity', 'Interactive with simulation'],
-  };
+  // Fallback: show kidney info
+  return ORGAN_MAP.kidney;
 }
 
 // ── Mini organ 3-D viewer ─────────────────────────────────────────────────────
@@ -138,7 +131,7 @@ function OrganPreview({ info }: { info: OrganInfo }) {
 // ── Organ info panel ─────────────────────────────────────────────────────────
 function OrganPanel({ info, onClose }: { info: OrganInfo; onClose: () => void }) {
   return (
-    <div className="absolute top-6 right-6 w-72 rounded-xl overflow-hidden shadow-2xl z-10"
+    <div className="absolute top-4 right-4 sm:top-6 sm:right-6 w-[calc(100vw-2rem)] max-w-68 sm:w-72 rounded-xl overflow-hidden shadow-2xl z-10"
       style={{ background: 'rgba(10,10,20,0.92)', border: '1px solid rgba(255,255,255,0.08)' }}
     >
       {/* Header */}
@@ -221,9 +214,15 @@ function OrgansModel({ onOrganClick }: { onOrganClick: (meshName: string) => voi
   const { scene } = useGLTF('/organs/orhans.glb');
   const hoveredRef = useRef<THREE.Mesh | null>(null);
 
+  // Debug: log all mesh names in the scene
+  const allMeshes: string[] = [];
+  scene.traverse((obj) => { if (obj instanceof THREE.Mesh) allMeshes.push(obj.name); });
+  console.log('[HumanBody] all mesh names in orhans.glb:', allMeshes);
+
   const handleClick = (e: ThreeEvent<MouseEvent>) => {
     e.stopPropagation();
     const mesh = e.object as THREE.Mesh;
+    console.log('[HumanBody] clicked mesh name:', mesh.name, '| parent:', mesh.parent?.name);
     onOrganClick(mesh.name ?? '');
   };
 
@@ -276,7 +275,7 @@ export default function HumanBody() {
   return (
     <section
       className="relative w-full bg-black"
-      style={{ height: 'calc(100vh - 56px)', marginTop: '-8px' }}
+      style={{ height: 'calc(100vh - 56px)', marginTop: '-1px' }}
     >
       <Canvas
         camera={{ position: [0, 0, 5], fov: 50 }}
@@ -325,16 +324,12 @@ export default function HumanBody() {
       )}
 
 
-      {/* Bottom-left: title */}
-      <div className="absolute bottom-6 left-24 pointer-events-none">
-        <h1 className="text-3xl md:text-4xl font-bold text-white leading-tight">
+      {/* Bottom: title + description */}
+      <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-16 right-4 sm:right-24 pointer-events-none flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white leading-tight">
           Human Digital Twin
         </h1>
-      </div>
-
-      {/* Bottom-right: description */}
-      <div className="absolute bottom-6 right-24 max-w-xs pointer-events-none">
-        <p className="text-xs text-white/60 leading-relaxed text-left">
+        <p className="text-xs text-white/60 leading-relaxed sm:text-right sm:max-w-xs">
           A molecule-level simulation of the human body that models how drugs are absorbed,
           distributed, metabolised, and excreted — before a single clinical trial begins.
         </p>

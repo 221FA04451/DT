@@ -174,7 +174,7 @@ export default function Benefits() {
           <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.35em] text-zinc-600">
             Platform Benefits
           </p>
-          <h2 className="text-5xl font-black tracking-tight text-white md:text-6xl leading-[1.05]">
+          <h2 className="text-4xl font-black tracking-tight text-white sm:text-5xl md:text-6xl leading-[1.05]">
             Built for every
             <br />
             <span className="text-zinc-600">stakeholder.</span>

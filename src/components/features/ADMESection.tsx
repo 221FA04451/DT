@@ -109,17 +109,17 @@ export default function ADMESection() {
 
   return (
     <section ref={containerRef} className="relative h-[800vh] bg-black">
-      <div className="sticky top-0 h-screen flex flex-col items-center justify-center overflow-hidden bg-black px-6 md:px-16 lg:px-24">
+      <div className="sticky top-0 h-screen flex flex-col items-center justify-center overflow-hidden bg-black px-4 sm:px-6 md:px-16 lg:px-24">
 
         {/* ── A D M E letters — driven by activeIndex, not scroll progress ── */}
-        <div className="relative z-10 flex justify-center items-baseline gap-x-4 md:gap-x-6 mb-8">
+        <div className="relative z-10 flex justify-center items-baseline gap-x-3 sm:gap-x-4 md:gap-x-6 mb-6 md:mb-8">
           {admeData.map((item, i) => (
             <PhaseLabel key={item.id} label={item.id} isActive={i === activeIndex} />
           ))}
         </div>
 
         {/* ── Single card ── */}
-        <div className="relative z-10 w-full max-w-5xl" style={{ height: "22rem" }}>
+        <div className="relative z-10 w-full max-w-5xl min-h-72 md:h-88">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeIndex}
@@ -127,23 +127,23 @@ export default function ADMESection() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.35, ease: "easeOut" }}
-              className="absolute inset-0 flex flex-col md:flex-row items-center justify-center gap-8 md:gap-14"
+              className="md:absolute md:inset-0 flex flex-col md:flex-row items-center justify-center gap-5 md:gap-14 px-2"
             >
-              <div className="relative w-56 h-56 md:w-80 md:h-80 shrink-0">
+              <div className="relative w-40 h-40 sm:w-52 sm:h-52 md:w-80 md:h-80 shrink-0">
                 <Image
                   src={phase.image}
                   alt={phase.title}
                   fill
                   priority
-                  sizes="(max-width: 768px) 224px, 320px"
+                  sizes="(max-width: 640px) 160px, (max-width: 768px) 208px, 320px"
                   className="object-contain"
                 />
               </div>
 
               <div className="hidden md:block w-px h-64 bg-zinc-800" />
 
-              <div className="flex flex-col items-start">
-                <h3 className="text-3xl md:text-5xl font-black tracking-tight mb-2 text-white">
+              <div className="flex flex-col items-start text-center md:text-left">
+                <h3 className="text-2xl sm:text-3xl md:text-5xl font-black tracking-tight mb-2 text-white">
                   {phase.title}
                 </h3>
                 <p className="text-zinc-500 text-xs md:text-sm leading-relaxed max-w-xs">
@@ -165,7 +165,7 @@ function PhaseLabel({ label, isActive }: { label: string; isActive: boolean }) {
     <div className="inline-block select-none leading-none">
       <motion.span
         animate={{
-          fontSize: isActive ? "8vw" : "3vw",
+          fontSize: isActive ? "clamp(2.5rem, 8vw, 7rem)" : "clamp(1.25rem, 3vw, 3rem)",
           color: isActive ? "#ffffff" : "#27272a",
         }}
         transition={{ duration: 0.3, ease: "easeOut" }}

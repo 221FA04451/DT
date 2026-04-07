@@ -68,24 +68,46 @@ export default function HowItWorks() {
   };
 
   return (
-    <div className="h-screen bg-black text-white flex items-center justify-center px-8 lg:px-16 overflow-hidden">
-      <div className="flex w-full max-w-7xl h-full items-center py-8">
+    <div className="min-h-screen bg-black text-white flex items-center justify-center px-4 sm:px-8 lg:px-16 py-10 md:py-0 overflow-hidden">
+      <div className="flex flex-col md:flex-row w-full max-w-7xl md:h-screen items-center gap-6 md:gap-0 md:py-8">
+
+        {/* Mobile: Image on top */}
+        <div className="block md:hidden w-full relative" style={{ height: '44vw', minHeight: 200, maxHeight: 300 }}>
+          <div className="w-full h-full rounded-2xl overflow-hidden bg-zinc-900 border border-zinc-800 relative">
+            <div className="absolute top-0 w-full h-7 bg-black z-10 flex justify-center items-center gap-2">
+              <div className="w-1.5 h-1.5 rounded-full bg-green-500/80 shadow-[0_0_4px_#22c55e]"></div>
+              <div className="w-3 h-3 rounded-full bg-zinc-800 border border-zinc-700"></div>
+            </div>
+            <AnimatePresence mode="wait">
+              <motion.img
+                key={activeIndex}
+                src={features[activeIndex].image}
+                alt={features[activeIndex].title}
+                initial={{ opacity: 0, scale: 1.05, filter: "blur(4px)" }}
+                animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+                exit={{ opacity: 0, scale: 0.95, filter: "blur(4px)" }}
+                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                className="w-full h-full object-cover mt-4"
+              />
+            </AnimatePresence>
+          </div>
+        </div>
 
         {/* Left Navigation & Accordion Container */}
-        <div className="flex w-[45%] max-w-md h-full items-center">
-          
+        <div className="flex w-full md:w-[45%] md:max-w-md md:h-full items-center">
+
           {/* Arrow Buttons */}
-          <div className="flex flex-col gap-4 mr-8 lg:mr-12">
-            <button 
+          <div className="flex flex-col gap-3 mr-4 sm:mr-8 lg:mr-12">
+            <button
               onClick={handlePrev}
-              className="w-10 h-10 flex items-center justify-center rounded-full bg-[#1c1c1e] hover:bg-[#2c2c2e] transition-colors focus:outline-none focus:ring-2 focus:ring-white/20"
+              className="w-9 h-9 md:w-10 md:h-10 flex items-center justify-center rounded-full bg-[#1c1c1e] hover:bg-[#2c2c2e] transition-colors focus:outline-none focus:ring-2 focus:ring-white/20"
               aria-label="Previous feature"
             >
               <ChevronUpIcon />
             </button>
-            <button 
+            <button
               onClick={handleNext}
-              className="w-10 h-10 flex items-center justify-center rounded-full bg-[#1c1c1e] hover:bg-[#2c2c2e] transition-colors focus:outline-none focus:ring-2 focus:ring-white/20"
+              className="w-9 h-9 md:w-10 md:h-10 flex items-center justify-center rounded-full bg-[#1c1c1e] hover:bg-[#2c2c2e] transition-colors focus:outline-none focus:ring-2 focus:ring-white/20"
               aria-label="Next feature"
             >
               <ChevronDownIcon />
@@ -93,7 +115,7 @@ export default function HowItWorks() {
           </div>
 
           {/* Feature List */}
-          <div className="flex flex-col gap-4 w-full">
+          <div className="flex flex-col gap-3 md:gap-4 w-full">
             {features.map((feature, index) => {
               const isActive = index === activeIndex;
 
@@ -104,12 +126,12 @@ export default function HowItWorks() {
                   onClick={() => setActiveIndex(index)}
                   className={`
                     cursor-pointer overflow-hidden origin-left
-                    ${isActive 
-                      ? "bg-[#333333] shadow-lg" 
+                    ${isActive
+                      ? "bg-[#333333] shadow-lg"
                       : "bg-[#1c1c1e] hover:bg-[#2c2c2e]"}
                   `}
                   style={{
-                    borderRadius: isActive ? "24px" : "9999px",
+                    borderRadius: isActive ? "20px" : "9999px",
                     width: isActive ? "100%" : "fit-content",
                   }}
                   transition={{
@@ -117,30 +139,30 @@ export default function HowItWorks() {
                   }}
                 >
                   {isActive ? (
-                    <motion.div 
+                    <motion.div
                       key="active-content"
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.1, duration: 0.4 }}
-                      className="p-6 md:p-8"
+                      className="p-4 sm:p-6 md:p-8"
                     >
-                      <p className="text-white text-base md:text-lg leading-relaxed">
+                      <p className="text-white text-sm sm:text-base md:text-lg leading-relaxed">
                         <span className="font-semibold text-white mr-2">{feature.title}.</span>
                         <span className="text-zinc-300">{feature.content}</span>
                       </p>
                     </motion.div>
                   ) : (
-                    <motion.div 
+                    <motion.div
                       key="inactive-content"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       transition={{ duration: 0.3 }}
-                      className="flex items-center gap-3 px-5 py-3"
+                      className="flex items-center gap-2 sm:gap-3 px-4 py-2.5 sm:px-5 sm:py-3"
                     >
                       <div className="text-zinc-400">
                         <PlusIcon />
                       </div>
-                      <span className="font-medium text-sm text-zinc-100 tracking-wide">
+                      <span className="font-medium text-xs sm:text-sm text-zinc-100 tracking-wide">
                         {feature.title}
                       </span>
                     </motion.div>
@@ -151,13 +173,12 @@ export default function HowItWorks() {
           </div>
         </div>
 
-        {/* Right Image Display */}
-        <div className="flex-1 h-full pl-8 lg:pl-16 relative perspective-1000">
+        {/* Right Image Display — desktop only */}
+        <div className="hidden md:block flex-1 h-full pl-8 lg:pl-16 relative">
           <div className="w-full h-full rounded-4xl overflow-hidden bg-zinc-900 border-12 border-black shadow-[0_0_0_1px_rgba(255,255,255,0.08)] relative flex items-center justify-center">
-            
-            {/* Monitor Mockup Bezel (simulated) */}
+
+            {/* Monitor Mockup Bezel */}
             <div className="absolute top-0 w-full h-8 bg-black z-10 flex justify-center items-center">
-              {/* Camera dot */}
               <div className="w-2 h-2 rounded-full bg-green-500/80 mr-2 shadow-[0_0_4px_#22c55e]"></div>
               <div className="w-4 h-4 rounded-full bg-zinc-800 border border-zinc-700"></div>
             </div>
@@ -174,7 +195,7 @@ export default function HowItWorks() {
                 className="w-full h-full object-cover rounded-xl mt-4"
               />
             </AnimatePresence>
-            
+
           </div>
         </div>
 
