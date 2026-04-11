@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 
 export function Footer() {
   return (
@@ -8,13 +7,7 @@ export function Footer() {
         {/* Logo / Breadcrumb */}
         <div className="mb-8">
           <Link href="/" className="group flex items-center gap-3 transition-opacity">
-            <Image
-              src="/logo.png"
-              alt="Digital Twin Logo"
-              width={100}
-              height={100}
-              className="object-contain drop-shadow-[0_0_15px_rgba(6,182,212,0.3)] transition-transform duration-500 group-hover:scale-105"
-            />
+            <span className="text-white font-bold text-lg tracking-tight group-hover:opacity-80 transition-opacity duration-200">TWIN 360</span>
           </Link>
         </div>
         

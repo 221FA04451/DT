@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 
 const NAV_ITEMS = ['Home','Solutions', 'Resources', 'Company'];
@@ -45,13 +44,7 @@ export function Header() {
 
           {/* Logo — left */}
           <Link href="/" className="flex shrink-0 items-center opacity-80 hover:opacity-100 transition-opacity duration-200">
-            <Image
-              src="/logo.png"
-              alt="Digital Twin"
-              width={100}
-              height={100}
-              className="object-contain"
-            />
+            <span className="text-white font-bold text-lg tracking-tight">TWIN 360</span>
           </Link>
 
           {/* Desktop nav — centered */}
