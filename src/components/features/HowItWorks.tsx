@@ -68,7 +68,7 @@ export default function HowItWorks() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center px-4 sm:px-8 lg:px-16 py-6 md:py-0 overflow-hidden">
+    <div className="h-screen bg-black text-white flex flex-col items-center justify-center px-4 sm:px-8 lg:px-16 py-6 md:py-0 overflow-hidden">
 
       {/* Section header */}
       <div className="w-full max-w-7xl pt-6 md:pt-10 pb-4 md:pb-6">
@@ -80,7 +80,7 @@ export default function HowItWorks() {
         </h2>
       </div>
 
-      <div className="flex flex-col md:flex-row w-full max-w-7xl md:flex-1 items-center gap-3 md:gap-0 md:pb-8">
+      <div className="flex flex-col md:flex-row w-full max-w-7xl md:h-115 items-center md:items-stretch gap-3 md:gap-0 md:pb-8">
 
         {/* Mobile: Image on top */}
         <div className="block md:hidden w-full relative" style={{ height: '44vw', minHeight: 200, maxHeight: 300 }}>
@@ -94,6 +94,7 @@ export default function HowItWorks() {
                 key={activeIndex}
                 src={features[activeIndex].image}
                 alt={features[activeIndex].title}
+                draggable={false}
                 initial={{ opacity: 0, scale: 1.05, filter: "blur(4px)" }}
                 animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
                 exit={{ opacity: 0, scale: 0.95, filter: "blur(4px)" }}
@@ -199,6 +200,7 @@ export default function HowItWorks() {
                 key={activeIndex}
                 src={features[activeIndex].image}
                 alt={features[activeIndex].title}
+                draggable={false}
                 initial={{ opacity: 0, scale: 1.05, filter: "blur(4px)" }}
                 animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
                 exit={{ opacity: 0, scale: 0.95, filter: "blur(4px)" }}
