@@ -12,7 +12,7 @@ export function Footer() {
         </div>
         
         {/* Directory Columns */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-y-8 gap-x-4 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-y-8 gap-x-4 mb-8">
           {/* Column 1 */}
           <div>
             <h3 className="font-semibold text-white mb-2 tracking-wide text-[12px]">Explore</h3>
