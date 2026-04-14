@@ -5,6 +5,16 @@ import { Canvas, useFrame, ThreeEvent } from '@react-three/fiber';
 import { useGLTF, OrbitControls, Environment, Center, Bounds } from '@react-three/drei';
 import * as THREE from 'three';
 
+// Suppress THREE.Clock deprecation warning emitted by OrbitControls internals
+// (three.js r169+ deprecated Clock in favour of Timer; library not yet updated)
+if (typeof window !== 'undefined') {
+  const _warn = console.warn.bind(console);
+  console.warn = (...args: unknown[]) => {
+    if (typeof args[0] === 'string' && args[0].includes('THREE.Clock')) return;
+    _warn(...args);
+  };
+}
+
 // ── Organ data ───────────────────────────────────────────────────────────────
 interface OrganInfo {
   name: string;
@@ -114,7 +124,7 @@ function OrganPreview({ info }: { info: OrganInfo }) {
     );
   }
   return (
-    <div style={{ height: 160, background: 'rgba(0,0,0,0.4)' }}>
+    <div style={{ height: 160, background: 'rgba(0,0,0,0.4)', position: 'relative' }}>
       <Canvas camera={{ position: [0, 0, 3], fov: 45 }} style={{ width: '100%', height: '100%' }}>
         <ambientLight intensity={0.7} />
         <directionalLight position={[3, 3, 3]} intensity={1.2} />
@@ -190,7 +200,7 @@ function BodyModel({ onClick }: { onClick: () => void }) {
     if (!resolvedRef.current) return;
     if (!shellApplied.current) {
       resolvedRef.current.material = new THREE.MeshPhysicalMaterial({
-        color: new THREE.Color('#0d1f3c'),
+        color: new THREE.Color('#e5e7eb'),
         transparent: true,
         opacity: 0.18,
         roughness: 0.2,
