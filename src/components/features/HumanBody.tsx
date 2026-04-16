@@ -10,7 +10,11 @@ import * as THREE from 'three';
 if (typeof window !== 'undefined') {
   const _warn = console.warn.bind(console);
   console.warn = (...args: unknown[]) => {
-    if (typeof args[0] === 'string' && args[0].includes('THREE.Clock')) return;
+    if (typeof args[0] === 'string' && (
+      args[0].includes('THREE.Clock') ||
+      args[0].includes('THREE.WebGLProgram') ||
+      args[0].includes('non-static position')
+    )) return;
     _warn(...args);
   };
 }
@@ -125,7 +129,7 @@ function OrganPreview({ info }: { info: OrganInfo }) {
   }
   return (
     <div style={{ height: 160, background: 'rgba(0,0,0,0.4)', position: 'relative' }}>
-      <Canvas camera={{ position: [0, 0, 3], fov: 45 }} style={{ width: '100%', height: '100%' }}>
+      <Canvas camera={{ position: [0, 0, 3], fov: 45 }} style={{ position: 'relative', width: '100%', height: '100%' }}>
         <ambientLight intensity={0.7} />
         <directionalLight position={[3, 3, 3]} intensity={1.2} />
         <Suspense fallback={null}>
@@ -289,7 +293,7 @@ export default function HumanBody() {
     >
       <Canvas
         camera={{ position: [0, 0, 5], fov: 50 }}
-        style={{ width: '100%', height: '100%' }}
+        style={{ position: 'relative', width: '100%', height: '100%' }}
       >
         <ambientLight intensity={0.6} />
         <directionalLight position={[5, 5, 5]} intensity={1} />

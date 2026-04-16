@@ -17,6 +17,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Digital Twin",
   description: "Patient-specific digital twins for precision medicine",
+  icons: {
+    icon: '/logo.png',
+  },
 };
 
 export default function RootLayout({
