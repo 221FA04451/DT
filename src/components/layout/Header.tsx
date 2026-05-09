@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 
-const NAV_ITEMS = ['Home','Solutions', 'Resources', 'Company'];
+const NAV_ITEMS = ['Home', 'Dashboard', 'Solutions', 'Resources', 'Company'];
 
 export function Header() {
   const [open, setOpen] = useState(false);
@@ -52,7 +52,7 @@ export function Header() {
             {NAV_ITEMS.map((item) => (
               <Link
                 key={item}
-                href={item === 'Home' ? '/' : '#'}
+                href={item === 'Home' ? '/' : item === 'Dashboard' ? '/dashboard' : '#'}
                 className="text-[12px] font-normal leading-none tracking-[0.01em] text-[#f5f5f7]/80 transition-colors duration-150 hover:text-[#f5f5f7]"
               >
                 {item}
@@ -112,7 +112,7 @@ export function Header() {
           {NAV_ITEMS.map((item) => (
             <Link
               key={item}
-              href={item === 'Home' ? '/' : '#'}
+              href={item === 'Home' ? '/' : item === 'Dashboard' ? '/dashboard' : '#'}
               onClick={() => setOpen(false)}
               className="border-b border-[#424245] py-4 text-[17px] font-normal text-[#f5f5f7] transition-colors hover:text-[#f5f5f7]/70"
             >
