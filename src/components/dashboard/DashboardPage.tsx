@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import BodyModel3D from "@/components/features/BodyModel3D";
+import BodyModel3D from "@/components/dashboard/BodyModel3D";
 
 const patient = {
   id: "OD10576",
@@ -51,6 +51,8 @@ const initialFilters: FilterGroup[] = [
     ],
   },
 ];
+
+const EMPTY_ORGANS: string[] = [];
 
 const riskTags = [
   { label: "TCF7L2 TT", tone: "red" },
@@ -273,7 +275,6 @@ export default function DashboardPage() {
   const [runLabel, setRunLabel] = useState("▶ RUN SIMULATION");
   const [isSimulating, setIsSimulating] = useState(false);
   const [simProgress, setSimProgress] = useState(0);
-  const [activeOrgans, setActiveOrgans] = useState<string[]>([]);
   const [vitals, setVitals] = useState({
     bodyTemp: 37.1,
     bloodPressure: [142, 88] as [number, number],
@@ -325,21 +326,15 @@ export default function DashboardPage() {
     setRunLabel("RUNNING SIM...");
     setIsSimulating(true);
     setSimProgress(0);
-    setActiveOrgans([]);
 
     const weeks = filters[1].items[1].value;
     const exerciseDays = filters[2].items[0].value;
-
-    const affectedOrgans = ['pancreas', 'liver', 'stomach'];
-    if (weeks > 12) affectedOrgans.push('kidney');
 
     let elapsed = 0;
     const simInterval = window.setInterval(() => {
       elapsed += 50;
       const progress = Math.min(elapsed / 2000, 1);
       setSimProgress(progress);
-
-      if (progress > 0.2) setActiveOrgans(affectedOrgans);
 
       if (progress > 0.1) {
         const tempChange = 0.3 * progress;
@@ -360,7 +355,6 @@ export default function DashboardPage() {
         window.setTimeout(() => {
           setRunLabel("▶ RUN SIMULATION");
           setIsSimulating(false);
-          setActiveOrgans([]);
         }, 800);
       }
     }, 50);
@@ -400,10 +394,10 @@ export default function DashboardPage() {
               </div>
 
               {/* Vertical Divider */}
-              <div className="w-[1px] bg-[#00e5ff40]" />
+              <div className="w-px bg-[#00e5ff40]" />
 
               {/* Status Info */}
-              <div className="flex min-w-[200px] flex-col items-end justify-center text-right">
+              <div className="flex min-w-50 flex-col items-end justify-center text-right">
                 <div className="flex items-center gap-2">
                   <span className="h-1.5 w-1.5 rounded-full bg-[#00e676] animate-pulse" />
                   <span className="font-mono text-[0.65rem] font-bold uppercase tracking-[0.3em] text-[#00e676]">SIM ACTIVE</span>
@@ -429,8 +423,7 @@ export default function DashboardPage() {
               <div className="font-mono text-[0.55rem] uppercase tracking-[0.2em] text-[#555555]">
                 SEMAGLUTIDE (OZEMPIC) 0.25 mg → 1.0 mg SC QW
               </div>
-              {/* Vertical Divider (Hidden on mobile) */}
-              <div className="hidden h-4 w-[1px] bg-[#00e5ff40] xl:block" />
+              <div className="hidden h-4 w-px bg-[#00e5ff40] xl:block" />
               <div className="flex items-center gap-2">
                 <span className="h-1.5 w-1.5 rounded-full bg-[#00e5ff]" />
                 <span className="font-mono text-[0.55rem] font-bold uppercase tracking-[0.2em] text-[#00e5ff]">
@@ -456,9 +449,9 @@ export default function DashboardPage() {
                 <div className="grid gap-6 xl:grid-cols-[160px_1fr_160px]">
                   <div className="space-y-2.5">
                     {[
-                      { label: "BODY TEMP", value: vitals.bodyTemp.toFixed(1), unit: "°C", bar: Math.min(vitals.bodyTemp / 37.5 * 100, 100), tone: "cyan" },
-                      { label: "BLOOD PRESSURE", value: `${vitals.bloodPressure[0].toFixed(0)}/${vitals.bloodPressure[1].toFixed(0)}`, unit: "mmHg", bar: Math.min(vitals.bloodPressure[0] / 160 * 100, 100), tone: vitals.bloodPressure[0] > 140 ? "amber" : "cyan" },
-                      { label: "PULSE RATE", value: `${pulse}`, unit: "bpm", bar: Math.min(pulse / 160 * 100, 100), tone: "cyan" },
+                      { label: "BODY TEMP", value: vitals.bodyTemp.toFixed(1), unit: "°C", bar: Math.min((vitals.bodyTemp / 37.5) * 100, 100), tone: "cyan" },
+                      { label: "BLOOD PRESSURE", value: `${vitals.bloodPressure[0].toFixed(0)}/${vitals.bloodPressure[1].toFixed(0)}`, unit: "mmHg", bar: Math.min((vitals.bloodPressure[0] / 160) * 100, 100), tone: vitals.bloodPressure[0] > 140 ? "amber" : "cyan" },
+                      { label: "PULSE RATE", value: `${pulse}`, unit: "bpm", bar: Math.min((pulse / 160) * 100, 100), tone: "cyan" },
                       { label: "SpO₂", value: vitals.spO2.toFixed(0), unit: "%", bar: vitals.spO2, tone: "cyan" },
                       { label: "eGFR", value: vitals.egfr.toFixed(0), unit: "mL/min", bar: vitals.egfr, tone: vitals.egfr > 75 ? "cyan" : "amber" },
                       { label: "hsCRP", value: vitals.hscRP.toFixed(1), unit: "mg/L", bar: Math.min(80 - vitals.hscRP * 8, 100), tone: vitals.hscRP > 3 ? "amber" : "cyan" },
@@ -477,42 +470,30 @@ export default function DashboardPage() {
                   </div>
 
                   <div className="relative flex items-center justify-center">
-                    <BodyModel3D activeOrgans={activeOrgans} simulationIntensity={simProgress} />
-                    {isSimulating && (
-                      <div className="absolute inset-x-0 bottom-4 flex flex-col items-center justify-center z-10 pointer-events-none">
-                        <div className="flex items-center gap-4 rounded-full border border-[#00e5ff40] bg-black/60 px-6 py-3 backdrop-blur-md shadow-[0_0_20px_rgba(0,229,255,0.2)]">
-                          <div className="h-5 w-5 rounded-full border-2 border-[#00e5ff] border-t-transparent animate-spin" />
-                          <div className="flex flex-col">
-                            <span className="font-mono text-xs uppercase tracking-widest text-[#00e5ff]">
-                              Simulating Drug Efficacy • {Math.round(simProgress * 100)}%
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    )}
+                    <BodyModel3D activeOrgans={EMPTY_ORGANS} simulationIntensity={0} />
                   </div>
 
                   <div className="space-y-2.5">
                     {[
-                      { organ: "LIVER", metric: "Hepatic Fat", value: "30-40% ↓", tone: "cyan", bar: 75 },
-                      { organ: "PANCREAS", metric: "Beta-cell", value: "Preserved", tone: "cyan", bar: 85 },
-                      { organ: "STOMACH", metric: "Emptying", value: "Delayed", tone: "cyan", bar: 45 },
-                      { organ: "KIDNEYS", metric: "Renal ACR", value: "25-35% ↓", tone: "cyan", bar: 65 },
-                      { organ: "HEART", metric: "MACE Risk", value: "~20% ↓", tone: "cyan", bar: 80 },
-                      { organ: "BRAIN", metric: "Appetite", value: "Suppressed", tone: "cyan", bar: 60 },
+                      { organ: "LIVER", metric: "Hepatic Fat", value: "30-40% ↓", bar: 75 },
+                      { organ: "PANCREAS", metric: "Beta-cell", value: "Preserved", bar: 85 },
+                      { organ: "STOMACH", metric: "Emptying", value: "Delayed", bar: 45 },
+                      { organ: "KIDNEYS", metric: "Renal ACR", value: "25-35% ↓", bar: 65 },
+                      { organ: "HEART", metric: "MACE Risk", value: "~20% ↓", bar: 80 },
+                      { organ: "BRAIN", metric: "Appetite", value: "Suppressed", bar: 60 },
                     ].map((item) => (
                       <div key={item.organ} className="rounded-xl border border-[#00e5ff30] bg-[#0a0a0a] px-3.5 py-2.5">
                         <div className="font-mono text-[0.6rem] uppercase tracking-[0.25em] text-[#b0b0b0]">
                           {item.organ} RESPONSE
                         </div>
-                        <div className={`mt-1 flex items-baseline text-[0.85rem] font-semibold ${item.tone === "amber" ? "text-[#ffaa00]" : "text-[#00e5ff]"}`}>
+                        <div className="mt-1 flex items-baseline text-[0.85rem] font-semibold text-[#00e5ff]">
                           {item.value}
                           <span className="ml-1.5 text-[0.65rem] font-medium text-[#b0b0b0]">{item.metric}</span>
                         </div>
                         <div className="mt-2.5 h-1 overflow-hidden rounded-full bg-[#111]">
-                          <div 
-                            className={`h-full transition-all duration-300 ${item.tone === "amber" ? "bg-[#ffaa00]" : "bg-[#00e5ff]"}`} 
-                            style={{ width: `${simProgress * item.bar}%` }} 
+                          <div
+                            className="h-full bg-[#00e5ff] transition-all duration-300"
+                            style={{ width: `${simProgress * item.bar}%` }}
                           />
                         </div>
                       </div>
@@ -667,7 +648,9 @@ export default function DashboardPage() {
                 className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left transition-colors duration-150 hover:bg-[#0a0a0a]"
               >
                 <div className="flex items-center gap-4">
-                  <div className="font-mono text-[0.65rem] uppercase tracking-[0.35em] text-[#00e5ff]">§ {index < 8 ? String(index + 1).padStart(2, "0") : "09–12"}</div>
+                  <div className="font-mono text-[0.65rem] uppercase tracking-[0.35em] text-[#00e5ff]">
+                    § {index < 8 ? String(index + 1).padStart(2, "0") : "09–12"}
+                  </div>
                   <div>
                     <div className="font-semibold text-white">{section.title}</div>
                     <div className="text-[0.8rem] text-[#b0b0b0]">{section.subtitle}</div>
@@ -695,7 +678,9 @@ export default function DashboardPage() {
           <div className="flex flex-col gap-3 xl:flex-row xl:items-center xl:justify-between">
             <div>TWYN360 DIGITAL TWIN PLATFORM · ABC HOSPITALS HYDERABAD · CONFIDENTIAL — FOR CLINICIAN USE ONLY</div>
             <div>
-              REPORT REF: <span className="text-[#00e5ff]">AIMS-OPD-2025-04872</span> · ASSESSMENT: <span className="text-[#00e5ff]">10 JUNE 2025</span> · ENGINE: <span className="text-[#00e5ff]">SPRA v1.4</span>
+              REPORT REF: <span className="text-[#00e5ff]">AIMS-OPD-2025-04872</span> · ASSESSMENT:{" "}
+              <span className="text-[#00e5ff]">10 JUNE 2025</span> · ENGINE:{" "}
+              <span className="text-[#00e5ff]">SPRA v1.4</span>
             </div>
           </div>
         </footer>

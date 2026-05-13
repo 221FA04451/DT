@@ -1,9 +1,32 @@
 'use client';
 
-import { Suspense, useRef, useState } from 'react';
+import { Component, ErrorInfo, ReactNode, Suspense, useRef, useState } from 'react';
 import { Canvas, useFrame, ThreeEvent } from '@react-three/fiber';
 import { useGLTF, OrbitControls, Environment, Center, Bounds } from '@react-three/drei';
 import * as THREE from 'three';
+
+class CanvasErrorBoundary extends Component<{ children: ReactNode; fallback?: ReactNode }, { hasError: boolean }> {
+  constructor(props: { children: ReactNode; fallback?: ReactNode }) {
+    super(props);
+    this.state = { hasError: false };
+  }
+  static getDerivedStateFromError(): { hasError: boolean } {
+    return { hasError: true };
+  }
+  componentDidCatch(error: Error, info: ErrorInfo) {
+    console.warn('[CanvasErrorBoundary]', error.message, info);
+  }
+  render() {
+    if (this.state.hasError) {
+      return this.props.fallback ?? (
+        <div className="flex items-center justify-center w-full h-full">
+          <p className="text-white/40 text-sm font-mono tracking-widest uppercase">3D model unavailable</p>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
 
 // Suppress THREE.Clock deprecation warning emitted by OrbitControls internals
 // (three.js r169+ deprecated Clock in favour of Timer; library not yet updated)
@@ -204,7 +227,6 @@ function BodyModel({ onClick }: { onClick: () => void }) {
     if (!resolvedRef.current) return;
     if (!shellApplied.current) {
       resolvedRef.current.material = new THREE.MeshPhysicalMaterial({
-        color: new THREE.Color('#e5e7eb'),
         transparent: true,
         opacity: 0.18,
         roughness: 0.2,
@@ -274,9 +296,6 @@ function OrgansModel({ onOrganClick }: { onOrganClick: (meshName: string) => voi
   );
 }
 
-// Preload both models
-useGLTF.preload('/organs/3D.glb');
-useGLTF.preload('/organs/orhans.glb');
 
 // ── Main component ────────────────────────────────────────────────────────────
 export default function HumanBody() {
@@ -291,6 +310,7 @@ export default function HumanBody() {
       className="relative w-full bg-black"
       style={{ height: 'calc(100vh - 56px)', marginTop: '-1px' }}
     >
+      <CanvasErrorBoundary>
       <Canvas
         camera={{ position: [0, 0, 5], fov: 50 }}
         style={{ position: 'relative', width: '100%', height: '100%' }}
@@ -317,6 +337,7 @@ export default function HumanBody() {
           autoRotateSpeed={0.5}
         />
       </Canvas>
+      </CanvasErrorBoundary>
 
       {/* Back to body button */}
       {showOrgans && (

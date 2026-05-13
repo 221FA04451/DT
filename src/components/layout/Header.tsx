@@ -11,7 +11,7 @@ export function Header() {
   const [hidden, setHidden] = useState(false);
   const { scrollY } = useScroll();
 
-  useMotionValueEvent(scrollY, "change", (latest) => {
+  useMotionValueEvent(scrollY, "change", (latest: number) => {
     const previous = scrollY.getPrevious() ?? 0;
     // Scroll down the page (latest > previous) -> Hide header
     // Scroll up the page (latest < previous) -> Show header

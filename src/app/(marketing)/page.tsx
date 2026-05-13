@@ -1,7 +1,7 @@
-import HumanBodySection from "@/components/features/HumanBody";
-import ADMESection      from "@/components/features/ADMESection";
-import HowItWorks       from "@/components/features/HowItWorks";
-import Benefits         from "@/components/features/Benefits";
+import HumanBodySection from "@/components/marketing/HumanBody";
+import ADMESection      from "@/components/marketing/ADMESection";
+import HowItWorks       from "@/components/marketing/HowItWorks";
+import Benefits         from "@/components/marketing/Benefits";
 
 export default function Home() {
   return (
